@@ -1,0 +1,273 @@
+{
+  "_comment": "RelayForge by Ragequits. Upload Python source to /home/container before starting.",
+  "meta": {
+    "version": "PTDL_v2",
+    "update_url": null
+  },
+  "exported_at": "2026-10-28T00:00:00+00:00",
+  "name": "RelayForge Python",
+  "author": "admin@ragequits.invalid",
+  "description": "Game to Discord bridge by Ragequits",
+  "features": null,
+  "docker_images": {
+    "Python 3.12": "ghcr.io/ptero-eggs/yolks:python_3.12",
+    "Python 3.11": "ghcr.io/pterodactyl/yolks:python_3.11"
+  },
+  "file_denylist": [],
+  "startup": "mkdir -p /home/container/.local && python3 -m pip install --no-input --disable-pip-version-check --target /home/container/.local -r requirements.txt && export PYTHONPATH=/home/container/.local:/home/container && exec python3 -u main.py",
+  "config": {
+    "files": "{}",
+    "startup": "{}",
+    "logs": "{}",
+    "stop": "^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/sh\nexit 0",
+      "container": "alpine:3.20",
+      "entrypoint": "ash"
+    }
+  },
+  "variables": [
+    {
+      "name": "GAME TYPE",
+      "description": "GAME_TYPE",
+      "env_variable": "GAME_TYPE",
+      "default_value": "factorio",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string|in:factorio,generic",
+      "field_type": "text"
+    },
+    {
+      "name": "GAME CHAT REGEX",
+      "description": "GAME_CHAT_REGEX",
+      "env_variable": "GAME_CHAT_REGEX",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "nullable|string",
+      "field_type": "text"
+    },
+    {
+      "name": "GAME JOIN REGEX",
+      "description": "GAME_JOIN_REGEX",
+      "env_variable": "GAME_JOIN_REGEX",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "nullable|string",
+      "field_type": "text"
+    },
+    {
+      "name": "GAME LEAVE REGEX",
+      "description": "GAME_LEAVE_REGEX",
+      "env_variable": "GAME_LEAVE_REGEX",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "nullable|string",
+      "field_type": "text"
+    },
+    {
+      "name": "GAME SEND COMMAND",
+      "description": "GAME_SEND_COMMAND",
+      "env_variable": "GAME_SEND_COMMAND",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "nullable|string",
+      "field_type": "text"
+    },
+    {
+      "name": "CHAT AUTO DETECT",
+      "description": "CHAT_AUTO_DETECT",
+      "env_variable": "CHAT_AUTO_DETECT",
+      "default_value": "false",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|in:true,false",
+      "field_type": "text"
+    },
+    {
+      "name": "PTERODACTYL URL",
+      "description": "PTERODACTYL_URL",
+      "env_variable": "PTERODACTYL_URL",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|url",
+      "field_type": "text"
+    },
+    {
+      "name": "PTERODACTYL SERVER ID",
+      "description": "PTERODACTYL_SERVER_ID",
+      "env_variable": "PTERODACTYL_SERVER_ID",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string",
+      "field_type": "text"
+    },
+    {
+      "name": "PTERODACTYL API KEY",
+      "description": "PTERODACTYL_API_KEY",
+      "env_variable": "PTERODACTYL_API_KEY",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string",
+      "field_type": "text"
+    },
+    {
+      "name": "DISCORD TOKEN",
+      "description": "DISCORD_TOKEN",
+      "env_variable": "DISCORD_TOKEN",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string",
+      "field_type": "text"
+    },
+    {
+      "name": "DISCORD CHANNEL ID",
+      "description": "DISCORD_CHANNEL_ID",
+      "env_variable": "DISCORD_CHANNEL_ID",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|numeric",
+      "field_type": "text"
+    },
+    {
+      "name": "DISCORD COMMAND ROLE ID",
+      "description": "DISCORD_COMMAND_ROLE_ID",
+      "env_variable": "DISCORD_COMMAND_ROLE_ID",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "nullable|string",
+      "field_type": "text"
+    },
+    {
+      "name": "SEND JOIN LEAVE",
+      "description": "SEND_JOIN_LEAVE",
+      "env_variable": "SEND_JOIN_LEAVE",
+      "default_value": "true",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|in:true,false",
+      "field_type": "text"
+    },
+    {
+      "name": "SEND GPS PING",
+      "description": "SEND_GPS_PING",
+      "env_variable": "SEND_GPS_PING",
+      "default_value": "false",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|in:true,false",
+      "field_type": "text"
+    },
+    {
+      "name": "ACHIEVEMENT MODE",
+      "description": "ACHIEVEMENT_MODE",
+      "env_variable": "ACHIEVEMENT_MODE",
+      "default_value": "true",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|in:true,false",
+      "field_type": "text"
+    },
+    {
+      "name": "ALERTS ENABLED",
+      "description": "ALERTS_ENABLED",
+      "env_variable": "ALERTS_ENABLED",
+      "default_value": "true",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|in:true,false",
+      "field_type": "text"
+    },
+    {
+      "name": "ALERT DISCORD ROLE ID",
+      "description": "ALERT_DISCORD_ROLE_ID",
+      "env_variable": "ALERT_DISCORD_ROLE_ID",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "nullable|string",
+      "field_type": "text"
+    },
+    {
+      "name": "ALERT DISCORD CHANNEL ID",
+      "description": "ALERT_DISCORD_CHANNEL_ID",
+      "env_variable": "ALERT_DISCORD_CHANNEL_ID",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "nullable|string",
+      "field_type": "text"
+    },
+    {
+      "name": "ALERT CPU THRESHOLD",
+      "description": "ALERT_CPU_THRESHOLD",
+      "env_variable": "ALERT_CPU_THRESHOLD",
+      "default_value": "0",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|numeric|min:0|max:100000",
+      "field_type": "text"
+    },
+    {
+      "name": "ALERT CPU SAMPLES",
+      "description": "ALERT_CPU_SAMPLES",
+      "env_variable": "ALERT_CPU_SAMPLES",
+      "default_value": "4",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|integer|min:1",
+      "field_type": "text"
+    },
+    {
+      "name": "ALERT POLL SECONDS",
+      "description": "ALERT_POLL_SECONDS",
+      "env_variable": "ALERT_POLL_SECONDS",
+      "default_value": "30",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|integer|min:5",
+      "field_type": "text"
+    },
+    {
+      "name": "ALERT ERROR THRESHOLD",
+      "description": "ALERT_ERROR_THRESHOLD",
+      "env_variable": "ALERT_ERROR_THRESHOLD",
+      "default_value": "5",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|integer|min:1",
+      "field_type": "text"
+    },
+    {
+      "name": "ALERT ERROR WINDOW SECONDS",
+      "description": "ALERT_ERROR_WINDOW_SECONDS",
+      "env_variable": "ALERT_ERROR_WINDOW_SECONDS",
+      "default_value": "120",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|integer|min:1",
+      "field_type": "text"
+    },
+    {
+      "name": "ALERT COOLDOWN SECONDS",
+      "description": "ALERT_COOLDOWN_SECONDS",
+      "env_variable": "ALERT_COOLDOWN_SECONDS",
+      "default_value": "900",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|integer|min:1",
+      "field_type": "text"
+    }
+  ]
+}
