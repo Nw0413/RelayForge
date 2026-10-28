@@ -1,0 +1,9 @@
+{
+  "disabled": [],
+  "aliases": {
+    "!online": "!players"
+  },
+  "custom": {
+    "!rules": "Be respectful and have fun!"
+  }
+}
