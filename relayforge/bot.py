@@ -127,7 +127,7 @@ class Bridge(discord.Client):
                 cpu=float(res['resources'].get('cpu_absolute') or 0)
                 self.high_cpu=self.high_cpu+1 if res.get('current_state')=='running' and cpu>=self.cpu_limit else 0
                 if self.high_cpu>=self.cpu_samples:
-                    await self.alert('cpu',f'⚠️ **Possible game server lag:** CPU at {cpu:.1f}% for {self.high_cpu} checks. CPU is not game UPS.')
+                    await self.alert('cpu',f' **Possible game server lag:** CPU at {cpu:.1f}% for {self.high_cpu} checks. CPU is not game UPS.')
             except asyncio.CancelledError: raise
             except Exception as exc:
                 self.high_cpu=0
@@ -180,7 +180,7 @@ class Bridge(discord.Client):
             self.error_times.append(now)
             if len(self.error_times)>=self.error_limit:
                 self.error_times.clear()
-                await self.alert('error',f'🚨 **Server error burst:** {self.error_limit} recent errors. Latest: `{safe_text(line)[:180]}`')
+                await self.alert('error',f' **Server error burst:** {self.error_limit} recent errors. Latest: `{safe_text(line)[:180]}`')
         if self.paused: return
         event=self.adapter.parse(line,self.send_join_leave,self.send_gps)
         if not event: return
@@ -247,7 +247,7 @@ class Bridge(discord.Client):
             lines.append('`!uptime` — game server container uptime')
             await self.send_channel(m.channel.id,'\n'.join(lines))
         elif cmd=='!ping':
-            await self.send_channel(m.channel.id,'🏓 Pong — RelayForge connected.')
+            await self.send_channel(m.channel.id,' Pong — RelayForge connected.')
         elif cmd=='!status':
             await self.send_channel(m.channel.id,f'**Bridge:** {"paused" if self.paused else "running"}\n**Game:** {self.game}\n**Alerts:** {self.alerts}\n**CPU threshold:** {f"{self.cpu_limit:g}%" if self.cpu_limit else "disabled"}')
         elif cmd=='!uptime':
@@ -267,10 +267,10 @@ class Bridge(discord.Client):
                 await self.send_channel(m.channel.id,'You need the configured Discord command role.'); return
             if cmd=='!pause':
                 self.paused=True
-                await self.send_channel(m.channel.id,'⏸️ Chat bridge paused; alerts remain enabled.')
+                await self.send_channel(m.channel.id,' Chat bridge paused; alerts remain enabled.')
             elif cmd=='!resume':
                 self.paused=False
-                await self.send_channel(m.channel.id,'▶️ Chat bridge resumed.')
+                await self.send_channel(m.channel.id,' Chat bridge resumed.')
             else:
                 if not arg or self.paused:
                     await self.send_channel(m.channel.id,'Usage: `!announce <text>` (resume the bridge first).'); return
