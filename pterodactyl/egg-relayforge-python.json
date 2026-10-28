@@ -1,13 +1,13 @@
 {
-  "_comment": "RelayForge by Ragequits. Upload Python source to /home/container before starting.",
+  "_comment": "RelayForge, Upload Python source to /home/container before starting.",
   "meta": {
     "version": "PTDL_v2",
     "update_url": null
   },
   "exported_at": "2026-10-28T00:00:00+00:00",
-  "name": "RelayForge Python",
-  "author": "admin@ragequits.invalid",
-  "description": "Game to Discord bridge by Ragequits",
+  "name": "RelayForge",
+  "author": "StarfarerShads",
+  "description": "Game to Discord bridge using Ptyerodactyl API hooks.",
   "features": null,
   "docker_images": {
     "Python 3.12": "ghcr.io/ptero-eggs/yolks:python_3.12",
